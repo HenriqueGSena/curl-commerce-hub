@@ -1,0 +1,115 @@
+
+import { useState } from "react";
+import { Search, ShoppingBag, Menu, X, User } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { useCart } from "@/hooks/useCart";
+import { Link } from "react-router-dom";
+
+export const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { items } = useCart();
+  
+  const cartItemsCount = items.reduce((total, item) => total + item.quantity, 0);
+
+  return (
+    <header className="bg-white shadow-sm border-b border-pink-100 sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <Link to="/" className="flex items-center space-x-2">
+            <div className="bg-gradient-to-r from-pink-400 to-rose-400 text-white p-2 rounded-lg">
+              <span className="font-bold text-xl">H</span>
+            </div>
+            <span className="text-2xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent">
+              HairLux
+            </span>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-8">
+            <Link to="/" className="text-gray-700 hover:text-pink-600 transition-colors">
+              Início
+            </Link>
+            <Link to="/produtos" className="text-gray-700 hover:text-pink-600 transition-colors">
+              Produtos
+            </Link>
+            <Link to="/categorias" className="text-gray-700 hover:text-pink-600 transition-colors">
+              Categorias
+            </Link>
+            <Link to="/sobre" className="text-gray-700 hover:text-pink-600 transition-colors">
+              Sobre
+            </Link>
+          </nav>
+
+          {/* Search Bar */}
+          <div className="hidden md:flex items-center space-x-4 flex-1 max-w-md mx-8">
+            <div className="relative w-full">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+              <Input
+                placeholder="Buscar produtos..."
+                className="pl-10 bg-gray-50 border-gray-200 focus:border-pink-300 focus:ring-pink-200"
+              />
+            </div>
+          </div>
+
+          {/* Right Side Icons */}
+          <div className="flex items-center space-x-4">
+            <Button variant="ghost" size="sm" className="hidden md:flex">
+              <User className="h-5 w-5 text-gray-600" />
+            </Button>
+            
+            <Link to="/carrinho">
+              <Button variant="ghost" size="sm" className="relative">
+                <ShoppingBag className="h-5 w-5 text-gray-600" />
+                {cartItemsCount > 0 && (
+                  <Badge className="absolute -top-2 -right-2 bg-pink-500 text-white text-xs px-1 min-w-[20px] h-5 flex items-center justify-center rounded-full">
+                    {cartItemsCount}
+                  </Badge>
+                )}
+              </Button>
+            </Link>
+
+            {/* Mobile Menu Button */}
+            <Button
+              variant="ghost"
+              size="sm"
+              className="md:hidden"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </Button>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden py-4 border-t border-gray-200">
+            <div className="flex flex-col space-y-4">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                <Input
+                  placeholder="Buscar produtos..."
+                  className="pl-10 bg-gray-50 border-gray-200"
+                />
+              </div>
+              <Link to="/" className="text-gray-700 hover:text-pink-600 transition-colors">
+                Início
+              </Link>
+              <Link to="/produtos" className="text-gray-700 hover:text-pink-600 transition-colors">
+                Produtos
+              </Link>
+              <Link to="/categorias" className="text-gray-700 hover:text-pink-600 transition-colors">
+                Categorias
+              </Link>
+              <Link to="/sobre" className="text-gray-700 hover:text-pink-600 transition-colors">
+                Sobre
+              </Link>
+            </div>
+          </div>
+        )}
+      </div>
+    </header>
+  );
+};
