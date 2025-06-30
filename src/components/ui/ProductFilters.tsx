@@ -3,11 +3,14 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { X } from "lucide-react";
 
 interface ProductFiltersProps {
   onFilterChange: (filters: string[]) => void;
   activeFilters: string[];
+  onSortChange: (sortOrder: "newest" | "oldest") => void;
+  sortOrder: "newest" | "oldest";
 }
 
 const filterCategories = [
@@ -38,7 +41,7 @@ const filterCategories = [
   }
 ];
 
-export const ProductFilters = ({ onFilterChange, activeFilters }: ProductFiltersProps) => {
+export const ProductFilters = ({ onFilterChange, activeFilters, onSortChange, sortOrder }: ProductFiltersProps) => {
   const [selectedFilters, setSelectedFilters] = useState<string[]>(activeFilters);
 
   const handleFilterToggle = (filterId: string) => {
@@ -75,6 +78,21 @@ export const ProductFilters = ({ onFilterChange, activeFilters }: ProductFilters
       </CardHeader>
       
       <CardContent className="space-y-6">
+        <div>
+          <h3 className="font-semibold text-gray-900 mb-3">
+            Ordenar por
+          </h3>
+          <Select value={sortOrder} onValueChange={onSortChange}>
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="newest">Mais Recentes</SelectItem>
+              <SelectItem value="oldest">Mais Antigos</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
         {filterCategories.map((category) => (
           <div key={category.title}>
             <h3 className="font-semibold text-gray-900 mb-3">
