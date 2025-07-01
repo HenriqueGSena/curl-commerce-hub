@@ -4,52 +4,61 @@ import { ShoppingBag, Menu, X, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useCart } from "@/hooks/useCart";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { items } = useCart();
   const { t } = useTranslation();
+  const navigate = useNavigate();
   
   const cartItemsCount = items.reduce((total, item) => total + item.quantity, 0);
+
+  const handleNavigation = (path: string) => {
+    setIsMenuOpen(false);
+    navigate(path);
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+  };
 
   return (
     <header className="bg-white/80 backdrop-blur-md shadow-sm border-b border-pink-100/50 sticky top-0 z-50 animate-fade-in">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
+          <button onClick={() => handleNavigation("/")} className="flex items-center space-x-2">
             <div className="bg-gradient-to-r from-pink-400 to-rose-400 text-white p-2 rounded-lg">
               <span className="font-bold text-xl">H</span>
             </div>
             <span className="text-2xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent">
               HairLux
             </span>
-          </Link>
+          </button>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link to="/" className="text-gray-700 hover:text-pink-600 transition-colors">
+            <button onClick={() => handleNavigation("/")} className="text-gray-700 hover:text-pink-600 transition-colors">
               {t('header.home')}
-            </Link>
-            <Link to="/produtos" className="text-gray-700 hover:text-pink-600 transition-colors">
+            </button>
+            <button onClick={() => handleNavigation("/produtos")} className="text-gray-700 hover:text-pink-600 transition-colors">
               {t('header.products')}
-            </Link>
-            <Link to="/sobre" className="text-gray-700 hover:text-pink-600 transition-colors">
+            </button>
+            <button onClick={() => handleNavigation("/sobre")} className="text-gray-700 hover:text-pink-600 transition-colors">
               {t('header.about')}
-            </Link>
+            </button>
           </nav>
 
           {/* Right Side Icons */}
           <div className="flex items-center space-x-4">
-            <Link to="/perfil">
+            <button onClick={() => handleNavigation("/perfil")}>
               <Button variant="ghost" size="sm" className="hidden md:flex">
                 <User className="h-5 w-5 text-gray-600" />
               </Button>
-            </Link>
+            </button>
             
-            <Link to="/carrinho">
+            <button onClick={() => handleNavigation("/carrinho")}>
               <Button variant="ghost" size="sm" className="relative">
                 <ShoppingBag className="h-5 w-5 text-gray-600" />
                 {cartItemsCount > 0 && (
@@ -58,7 +67,7 @@ export const Header = () => {
                   </Badge>
                 )}
               </Button>
-            </Link>
+            </button>
 
             {/* Mobile Menu Button */}
             <Button
@@ -71,27 +80,45 @@ export const Header = () => {
             </Button>
           </div>
         </div>
+      </div>
 
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-200/50 animate-fade-in">
-            <div className="flex flex-col space-y-4">
-              <Link to="/" className="text-gray-700 hover:text-pink-600 transition-colors">
+      {/* Mobile Menu Overlay */}
+      {isMenuOpen && (
+        <>
+          <div 
+            className="fixed inset-0 bg-black/50 z-40 md:hidden"
+            onClick={() => setIsMenuOpen(false)}
+          />
+          <div className="fixed top-16 left-0 right-0 bg-white shadow-lg z-50 md:hidden animate-fade-in">
+            <div className="px-4 py-6 space-y-4">
+              <button 
+                onClick={() => handleNavigation("/")} 
+                className="block w-full text-left py-3 px-4 text-gray-700 hover:text-pink-600 hover:bg-pink-50 rounded-lg transition-colors"
+              >
                 {t('header.home')}
-              </Link>
-              <Link to="/produtos" className="text-gray-700 hover:text-pink-600 transition-colors">
+              </button>
+              <button 
+                onClick={() => handleNavigation("/produtos")} 
+                className="block w-full text-left py-3 px-4 text-gray-700 hover:text-pink-600 hover:bg-pink-50 rounded-lg transition-colors"
+              >
                 {t('header.products')}
-              </Link>
-              <Link to="/sobre" className="text-gray-700 hover:text-pink-600 transition-colors">
+              </button>
+              <button 
+                onClick={() => handleNavigation("/sobre")} 
+                className="block w-full text-left py-3 px-4 text-gray-700 hover:text-pink-600 hover:bg-pink-50 rounded-lg transition-colors"
+              >
                 {t('header.about')}
-              </Link>
-              <Link to="/perfil" className="text-gray-700 hover:text-pink-600 transition-colors">
+              </button>
+              <button 
+                onClick={() => handleNavigation("/perfil")} 
+                className="block w-full text-left py-3 px-4 text-gray-700 hover:text-pink-600 hover:bg-pink-50 rounded-lg transition-colors"
+              >
                 Perfil
-              </Link>
+              </button>
             </div>
           </div>
-        )}
-      </div>
+        </>
+      )}
     </header>
   );
 };

@@ -2,7 +2,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Star, ShoppingCart, Heart, LogIn } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Star, ShoppingCart, Heart, LogIn, Calculator, Truck } from "lucide-react";
 import { useCart } from "@/hooks/useCart";
 import { useAuth } from "@/hooks/useAuth";
 import { useFavorites } from "@/hooks/useFavorites";
@@ -19,6 +20,16 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   const { addToCart } = useCart();
   const { isAuthenticated } = useAuth();
   const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
+  const [cep, setCep] = useState("");
+  const [frete, setFrete] = useState<number | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Simular múltiplas imagens para galeria
+  const productImages = [
+    product.image,
+    product.image,
+    product.image
+  ];
 
   const handleAddToCart = () => {
     if (!isAuthenticated) {
@@ -81,11 +92,43 @@ export const ProductCard = ({ product }: ProductCardProps) => {
     }
   };
 
+  const calcularFrete = () => {
+    if (cep.length === 8) {
+      // Simulação de cálculo de frete
+      const freteCalculado = Math.floor(Math.random() * 20) + 5;
+      setFrete(freteCalculado);
+      toast({
+        title: "Frete calculado",
+        description: `Frete para ${cep}: R$ ${freteCalculado.toFixed(2)}`,
+      });
+    } else {
+      toast({
+        title: "CEP inválido",
+        description: "Digite um CEP válido com 8 dígitos.",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
-    <Card className="group hover:shadow-xl transition-all duration-300 cursor-pointer border-pink-100 hover:border-pink-200 overflow-hidden">
+    <Card className="group hover:shadow-xl transition-all duration-300 border-pink-100 hover:border-pink-200 overflow-hidden h-full flex flex-col">
       <div className="relative">
-        <div className="aspect-square bg-gradient-to-br from-pink-100 to-rose-100 flex items-center justify-center">
+        {/* Galeria de imagens */}
+        <div className="aspect-square bg-gradient-to-br from-pink-100 to-rose-100 flex items-center justify-center relative">
           <div className="text-gray-400 text-4xl">📸</div>
+          
+          {/* Indicadores da galeria */}
+          <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-1">
+            {productImages.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentImageIndex(index)}
+                className={`w-2 h-2 rounded-full transition-colors ${
+                  index === currentImageIndex ? 'bg-white' : 'bg-white/50'
+                }`}
+              />
+            ))}
+          </div>
         </div>
         
         {product.discount && (
@@ -110,14 +153,14 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         </Button>
       </div>
 
-      <CardContent className="p-4">
+      <CardContent className="p-4 flex-1 flex flex-col">
         <div className="mb-2">
           <Badge variant="secondary" className="text-xs bg-pink-100 text-pink-700">
             {product.category}
           </Badge>
         </div>
         
-        <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-pink-700 transition-colors">
+        <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2 min-h-[3rem] group-hover:text-pink-700 transition-colors">
           {product.name}
         </h3>
         
@@ -126,6 +169,11 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           <span className="text-sm font-medium text-gray-700">{product.rating}</span>
           <span className="text-sm text-gray-500">({product.reviews})</span>
         </div>
+
+        {/* Descrição do produto */}
+        <p className="text-sm text-gray-600 mb-3 flex-1">
+          Cabelo de alta qualidade, ideal para transformar seu visual com elegância e naturalidade.
+        </p>
         
         <div className="flex items-center gap-2 mb-4">
           <span className="text-xl font-bold text-gray-900">
@@ -137,6 +185,36 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             </span>
           )}
         </div>
+
+        {/* Calculadora de CEP */}
+        <div className="mb-4 p-3 bg-gray-50 rounded-lg">
+          <div className="flex items-center gap-2 mb-2">
+            <Truck className="h-4 w-4 text-gray-600" />
+            <span className="text-sm font-medium text-gray-700">Calcular frete</span>
+          </div>
+          <div className="flex gap-2">
+            <Input
+              placeholder="00000-000"
+              value={cep}
+              onChange={(e) => setCep(e.target.value.replace(/\D/g, ''))}
+              maxLength={8}
+              className="text-sm"
+            />
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={calcularFrete}
+              className="flex-shrink-0"
+            >
+              <Calculator className="h-4 w-4" />
+            </Button>
+          </div>
+          {frete && (
+            <p className="text-sm text-green-600 mt-2">
+              Frete: R$ {frete.toFixed(2)}
+            </p>
+          )}
+        </div>
         
         {isAuthenticated ? (
           <Button 
@@ -144,7 +222,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             className="w-full bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white group-hover:shadow-lg transition-all"
           >
             <ShoppingCart className="h-4 w-4 mr-2" />
-            Adicionar ao Carrinho
+            Comprar Agora
           </Button>
         ) : (
           <Link to="/perfil">

@@ -9,6 +9,9 @@ import { ProductGrid } from "@/components/ui/ProductGrid";
 import { ProductsHeader } from "@/components/ui/ProductsHeader";
 import { ProductsResultsInfo } from "@/components/ui/ProductsResultsInfo";
 import { NoProductsFound } from "@/components/ui/NoProductsFound";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { X } from "lucide-react";
 import { useProductFilters } from "@/hooks/useProductFilters";
 import { PRODUCTS_PER_PAGE } from "@/data/products";
 
@@ -18,7 +21,9 @@ const Produtos = () => {
     activeFilters,
     sortOrder,
     handleFilterChange,
-    handleSortChange
+    handleSortChange,
+    clearCategoryFilter,
+    categoryFilter
   } = useProductFilters();
   
   const [currentPage, setCurrentPage] = useState(1);
@@ -45,6 +50,16 @@ const Produtos = () => {
     handleSortChange(newSortOrder);
   };
 
+  const getCategoryDisplayName = (category: string) => {
+    const categoryMap: { [key: string]: string } = {
+      'naturais': 'Cabelos Naturais',
+      'sinteticos': 'Cabelos Sintéticos',
+      'mega-hair': 'Mega Hair',
+      'perucas': 'Perucas'
+    };
+    return categoryMap[category] || category;
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white animate-fade-in">
       <Header />
@@ -55,6 +70,26 @@ const Produtos = () => {
           currentPage={currentPage}
           totalPages={totalPages}
         />
+
+        {/* Filtro de categoria ativo */}
+        {categoryFilter && (
+          <div className="mb-6">
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-gray-600">Filtrando por:</span>
+              <Badge variant="secondary" className="bg-pink-100 text-pink-700 flex items-center gap-2">
+                {getCategoryDisplayName(categoryFilter)}
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-4 w-4 p-0 hover:bg-pink-200"
+                  onClick={clearCategoryFilter}
+                >
+                  <X className="h-3 w-3" />
+                </Button>
+              </Badge>
+            </div>
+          </div>
+        )}
 
         <div className="flex flex-col lg:flex-row gap-8">
           <aside className="lg:w-64 flex-shrink-0">

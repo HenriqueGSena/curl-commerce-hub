@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 const categories = [
   {
@@ -9,33 +10,45 @@ const categories = [
     name: "natural",
     description: "naturalDesc",
     icon: "🌿",
-    color: "from-green-400 to-emerald-500"
+    color: "from-green-400 to-emerald-500",
+    filter: "naturais"
   },
   {
     id: 2,
     name: "synthetic",
     description: "syntheticDesc",
     icon: "✨",
-    color: "from-purple-400 to-pink-500"
+    color: "from-purple-400 to-pink-500",
+    filter: "sinteticos"
   },
   {
     id: 3,
     name: "megaHair",
     description: "megaHairDesc",
     icon: "💫",
-    color: "from-blue-400 to-cyan-500"
+    color: "from-blue-400 to-cyan-500",
+    filter: "mega-hair"
   },
   {
     id: 4,
     name: "wigs",
     description: "wigsDesc",
     icon: "👸",
-    color: "from-rose-400 to-pink-500"
+    color: "from-rose-400 to-pink-500",
+    filter: "perucas"
   }
 ];
 
 export const Categories = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const handleCategoryClick = (filter: string) => {
+    navigate(`/produtos?categoria=${filter}`);
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+  };
 
   return (
     <section className="py-16 bg-white animate-fade-in">
@@ -62,7 +75,12 @@ export const Categories = () => {
                 <p className="text-gray-600 text-sm mb-4">
                   {t(`categories.${category.description}`)}
                 </p>
-                <Button variant="outline" size="sm" className="border-pink-300 text-pink-700 hover:bg-pink-50 group-hover:bg-pink-100">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="border-pink-300 text-pink-700 hover:bg-pink-50 group-hover:bg-pink-100"
+                  onClick={() => handleCategoryClick(category.filter)}
+                >
                   {t('categories.seeProducts')}
                 </Button>
               </CardContent>
