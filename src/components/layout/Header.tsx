@@ -5,15 +5,17 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useCart } from "@/hooks/useCart";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { items } = useCart();
+  const { t } = useTranslation();
   
   const cartItemsCount = items.reduce((total, item) => total + item.quantity, 0);
 
   return (
-    <header className="bg-white/80 backdrop-blur-md shadow-sm border-b border-pink-100/50 sticky top-0 z-50">
+    <header className="bg-white/80 backdrop-blur-md shadow-sm border-b border-pink-100/50 sticky top-0 z-50 animate-fade-in">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -29,16 +31,13 @@ export const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             <Link to="/" className="text-gray-700 hover:text-pink-600 transition-colors">
-              Início
+              {t('header.home')}
             </Link>
             <Link to="/produtos" className="text-gray-700 hover:text-pink-600 transition-colors">
-              Produtos
-            </Link>
-            <Link to="/categorias" className="text-gray-700 hover:text-pink-600 transition-colors">
-              Categorias
+              {t('header.products')}
             </Link>
             <Link to="/sobre" className="text-gray-700 hover:text-pink-600 transition-colors">
-              Sobre
+              {t('header.about')}
             </Link>
           </nav>
 
@@ -73,19 +72,16 @@ export const Header = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-200/50">
+          <div className="md:hidden py-4 border-t border-gray-200/50 animate-fade-in">
             <div className="flex flex-col space-y-4">
               <Link to="/" className="text-gray-700 hover:text-pink-600 transition-colors">
-                Início
+                {t('header.home')}
               </Link>
               <Link to="/produtos" className="text-gray-700 hover:text-pink-600 transition-colors">
-                Produtos
-              </Link>
-              <Link to="/categorias" className="text-gray-700 hover:text-pink-600 transition-colors">
-                Categorias
+                {t('header.products')}
               </Link>
               <Link to="/sobre" className="text-gray-700 hover:text-pink-600 transition-colors">
-                Sobre
+                {t('header.about')}
               </Link>
             </div>
           </div>

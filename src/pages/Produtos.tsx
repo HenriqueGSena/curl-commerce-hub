@@ -1,10 +1,11 @@
-
 import { useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { ProductFilters } from "@/components/ui/ProductFilters";
+import { MobileProductFilters } from "@/components/ui/MobileProductFilters";
 import { ProductPagination } from "@/components/ui/ProductPagination";
+import { useTranslation } from "react-i18next";
 
 const allProducts = [
   {
@@ -120,6 +121,7 @@ const Produtos = () => {
   const [activeFilters, setActiveFilters] = useState<string[]>([]);
   const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
   const [currentPage, setCurrentPage] = useState(1);
+  const { t } = useTranslation();
 
   const handleFilterChange = (filters: string[]) => {
     setActiveFilters(filters);
@@ -168,36 +170,46 @@ const Produtos = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white animate-fade-in">
       <Header />
       
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
           <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-            Nossos Produtos
+            {t('products.title')}
           </h1>
           <p className="text-xl text-gray-600">
-            Encontre o cabelo perfeito para você
+            {t('products.subtitle')}
           </p>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8">
           <aside className="lg:w-64 flex-shrink-0">
-            <ProductFilters 
-              onFilterChange={handleFilterChange}
-              activeFilters={activeFilters}
-              onSortChange={handleSortChange}
-              sortOrder={sortOrder}
-            />
+            <div className="hidden lg:block">
+              <ProductFilters 
+                onFilterChange={handleFilterChange}
+                activeFilters={activeFilters}
+                onSortChange={handleSortChange}
+                sortOrder={sortOrder}
+              />
+            </div>
+            <div className="lg:hidden mb-4">
+              <MobileProductFilters
+                onFilterChange={handleFilterChange}
+                activeFilters={activeFilters}
+                onSortChange={handleSortChange}
+                sortOrder={sortOrder}
+              />
+            </div>
           </aside>
           
           <div className="flex-1">
             <div className="mb-6 flex justify-between items-center">
               <p className="text-gray-600">
-                {filteredProducts.length} produto{filteredProducts.length !== 1 ? 's' : ''} encontrado{filteredProducts.length !== 1 ? 's' : ''}
+                {filteredProducts.length} {filteredProducts.length === 1 ? t('products.productsFound') : t('products.productsFoundPlural')}
                 {totalPages > 1 && (
                   <span className="ml-2 text-sm">
-                    (Página {currentPage} de {totalPages})
+                    ({t('products.page')} {currentPage} {t('products.of')} {totalPages})
                   </span>
                 )}
               </p>
@@ -205,14 +217,16 @@ const Produtos = () => {
             
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
               {currentProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                <div key={product.id} className="animate-fade-in">
+                  <ProductCard product={product} />
+                </div>
               ))}
             </div>
             
             {filteredProducts.length === 0 && (
               <div className="text-center py-12">
                 <p className="text-gray-500 text-lg">
-                  Nenhum produto encontrado com os filtros selecionados.
+                  {t('products.noProducts')}
                 </p>
               </div>
             )}

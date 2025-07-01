@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import Produtos from "./pages/Produtos";
 import Carrinho from "./pages/Carrinho";
 import NotFound from "./pages/NotFound";
+import "./i18n";
 
 const queryClient = new QueryClient();
 

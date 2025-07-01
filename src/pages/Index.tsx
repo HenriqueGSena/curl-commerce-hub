@@ -9,9 +9,15 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white animate-fade-in">
       <Header />
-      <Hero />
-      <Categories />
-      <FeaturedProducts />
+      <div className="animate-fade-in">
+        <Hero />
+      </div>
+      <div className="animate-fade-in">
+        <Categories />
+      </div>
+      <div className="animate-fade-in">
+        <FeaturedProducts />
+      </div>
       <Footer />
     </div>
   );

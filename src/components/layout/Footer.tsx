@@ -1,14 +1,16 @@
 
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Instagram, Facebook, Twitter, Mail, Phone, MapPin } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export const Footer = () => {
+  const { t } = useTranslation();
+
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-gray-900 text-white animate-fade-in">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid md:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-3 gap-8">
           {/* Brand Section */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
@@ -18,7 +20,7 @@ export const Footer = () => {
               <span className="text-2xl font-bold">HairLux</span>
             </div>
             <p className="text-gray-400 text-sm">
-              Transformando vidas através da beleza. Oferecemos os melhores cabelos e acessórios para você expressar sua personalidade.
+              {t('footer.description')}
             </p>
             <div className="flex space-x-4">
               <Button variant="ghost" size="sm" className="text-gray-400 hover:text-white">
@@ -35,43 +37,25 @@ export const Footer = () => {
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Links Rápidos</h3>
+            <h3 className="text-lg font-semibold">{t('footer.quickLinks')}</h3>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Sobre Nós</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Produtos</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Categorias</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Contato</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Blog</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.aboutUs')}</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('header.products')}</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.contact')}</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.blog')}</a></li>
             </ul>
           </div>
 
           {/* Customer Service */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Atendimento</h3>
+            <h3 className="text-lg font-semibold">{t('footer.customerService')}</h3>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Central de Ajuda</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Política de Troca</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Frete e Entrega</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Termos de Uso</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Privacidade</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.helpCenter')}</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.returnPolicy')}</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.shipping')}</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.terms')}</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.privacy')}</a></li>
             </ul>
-          </div>
-
-          {/* Newsletter */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Newsletter</h3>
-            <p className="text-gray-400 text-sm">
-              Receba ofertas exclusivas e novidades em primeira mão!
-            </p>
-            <div className="flex space-x-2">
-              <Input 
-                placeholder="Seu e-mail"
-                className="bg-gray-800 border-gray-700 text-white placeholder-gray-400"
-              />
-              <Button className="bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700">
-                <Mail className="h-4 w-4" />
-              </Button>
-            </div>
           </div>
         </div>
 
@@ -95,7 +79,7 @@ export const Footer = () => {
           </div>
           
           <div className="text-sm text-gray-400">
-            © 2024 HairLux. Todos os direitos reservados.
+            © 2024 HairLux. {t('footer.allRights')}
           </div>
         </div>
       </div>
