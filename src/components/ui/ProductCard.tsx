@@ -6,18 +6,7 @@ import { Star, ShoppingCart, Heart } from "lucide-react";
 import { useCart } from "@/hooks/useCart";
 import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  originalPrice?: number;
-  image: string;
-  category: string;
-  rating: number;
-  reviews: number;
-  discount?: number;
-}
+import { Product } from "@/data/products";
 
 interface ProductCardProps {
   product: Product;
