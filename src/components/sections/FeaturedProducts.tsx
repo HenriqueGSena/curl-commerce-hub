@@ -14,7 +14,9 @@ const featuredProducts = [
     category: "Cabelos Naturais",
     rating: 4.9,
     reviews: 125,
-    discount: 25
+    discount: 25,
+    filters: ["longos", "loiros", "lisos"],
+    createdAt: "2024-01-15"
   },
   {
     id: 2,
@@ -25,7 +27,9 @@ const featuredProducts = [
     category: "Mega Hair",
     rating: 4.8,
     reviews: 89,
-    discount: 20
+    discount: 20,
+    filters: ["longos", "cacheados", "castanhos"],
+    createdAt: "2024-02-10"
   },
   {
     id: 3,
@@ -36,7 +40,9 @@ const featuredProducts = [
     category: "Perucas",
     rating: 4.7,
     reviews: 67,
-    discount: 25
+    discount: 25,
+    filters: ["longos", "loiros", "ondulados"],
+    createdAt: "2024-03-05"
   },
   {
     id: 4,
@@ -47,7 +53,9 @@ const featuredProducts = [
     category: "Cabelos Sintéticos",
     rating: 4.6,
     reviews: 156,
-    discount: 25
+    discount: 25,
+    filters: ["curtos", "crespos", "pretos"],
+    createdAt: "2024-01-20"
   }
 ];
 
