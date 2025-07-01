@@ -1,19 +1,23 @@
 
-import { useState } from "react";
+import { useEffect } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { LoginForm } from "@/components/auth/LoginForm";
 import { UserProfile } from "@/components/auth/UserProfile";
+import { useAuth } from "@/hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const Perfil = () => {
-  const [user, setUser] = useState(null);
+  const { user, isAuthenticated, login, logout } = useAuth();
+  const navigate = useNavigate();
 
   const handleLoginSuccess = (userData: any) => {
-    setUser(userData);
+    login(userData);
   };
 
   const handleLogout = () => {
-    setUser(null);
+    logout();
+    navigate("/");
   };
 
   return (
@@ -22,14 +26,14 @@ const Perfil = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 animate-fade-in">
         <div className="text-center mb-8">
           <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-            {user ? "Meu Perfil" : "Entrar na Conta"}
+            {isAuthenticated ? "Meu Perfil" : "Entrar na Conta"}
           </h1>
           <p className="text-xl text-gray-600">
-            {user ? "Gerencie sua conta e veja seu histórico" : "Acesse sua conta para ver seu histórico de compras"}
+            {isAuthenticated ? "Gerencie sua conta e veja seus favoritos" : "Acesse sua conta para ver seus favoritos e histórico de compras"}
           </p>
         </div>
 
-        {user ? (
+        {isAuthenticated && user ? (
           <UserProfile user={user} onLogout={handleLogout} />
         ) : (
           <LoginForm onLoginSuccess={handleLoginSuccess} />

@@ -2,11 +2,14 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Star, ShoppingCart, Heart } from "lucide-react";
+import { Star, ShoppingCart, Heart, LogIn } from "lucide-react";
 import { useCart } from "@/hooks/useCart";
+import { useAuth } from "@/hooks/useAuth";
+import { useFavorites } from "@/hooks/useFavorites";
 import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
 import { Product } from "@/data/products";
+import { Link } from "react-router-dom";
 
 interface ProductCardProps {
   product: Product;
@@ -14,9 +17,19 @@ interface ProductCardProps {
 
 export const ProductCard = ({ product }: ProductCardProps) => {
   const { addToCart } = useCart();
-  const [isLiked, setIsLiked] = useState(false);
+  const { isAuthenticated } = useAuth();
+  const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
 
   const handleAddToCart = () => {
+    if (!isAuthenticated) {
+      toast({
+        title: "Login necessário",
+        description: "Você precisa estar logado para adicionar produtos ao carrinho.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     addToCart({
       id: product.id,
       name: product.name,
@@ -31,12 +44,41 @@ export const ProductCard = ({ product }: ProductCardProps) => {
     });
   };
 
-  const handleToggleLike = () => {
-    setIsLiked(!isLiked);
-    toast({
-      title: isLiked ? "Removido dos favoritos" : "Adicionado aos favoritos",
-      description: `${product.name} ${isLiked ? "foi removido dos" : "foi adicionado aos"} favoritos.`,
-    });
+  const handleToggleFavorite = () => {
+    if (!isAuthenticated) {
+      toast({
+        title: "Login necessário",
+        description: "Você precisa estar logado para favoritar produtos.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const favoriteItem = {
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      category: product.category,
+      rating: product.rating,
+      reviews: product.reviews,
+      originalPrice: product.originalPrice,
+      discount: product.discount,
+    };
+
+    if (isFavorite(product.id)) {
+      removeFromFavorites(product.id);
+      toast({
+        title: "Removido dos favoritos",
+        description: `${product.name} foi removido dos favoritos.`,
+      });
+    } else {
+      addToFavorites(favoriteItem);
+      toast({
+        title: "Adicionado aos favoritos",
+        description: `${product.name} foi adicionado aos favoritos.`,
+      });
+    }
   };
 
   return (
@@ -56,10 +98,14 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           variant="ghost"
           size="sm"
           className="absolute top-2 right-2 bg-white/80 hover:bg-white transition-colors"
-          onClick={handleToggleLike}
+          onClick={handleToggleFavorite}
         >
           <Heart 
-            className={`h-4 w-4 ${isLiked ? 'text-red-500 fill-red-500' : 'text-gray-600'}`} 
+            className={`h-4 w-4 ${
+              isAuthenticated && isFavorite(product.id) 
+                ? 'text-red-500 fill-red-500' 
+                : 'text-gray-600'
+            }`} 
           />
         </Button>
       </div>
@@ -92,13 +138,25 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           )}
         </div>
         
-        <Button 
-          onClick={handleAddToCart}
-          className="w-full bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white group-hover:shadow-lg transition-all"
-        >
-          <ShoppingCart className="h-4 w-4 mr-2" />
-          Adicionar ao Carrinho
-        </Button>
+        {isAuthenticated ? (
+          <Button 
+            onClick={handleAddToCart}
+            className="w-full bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white group-hover:shadow-lg transition-all"
+          >
+            <ShoppingCart className="h-4 w-4 mr-2" />
+            Adicionar ao Carrinho
+          </Button>
+        ) : (
+          <Link to="/perfil">
+            <Button 
+              variant="outline"
+              className="w-full border-pink-300 text-pink-700 hover:bg-pink-50"
+            >
+              <LogIn className="h-4 w-4 mr-2" />
+              Faça login para comprar
+            </Button>
+          </Link>
+        )}
       </CardContent>
     </Card>
   );

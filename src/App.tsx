@@ -5,6 +5,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "@/hooks/useCart";
+import { AuthProvider } from "@/hooks/useAuth";
+import { FavoritesProvider } from "@/hooks/useFavorites";
 import Index from "./pages/Index";
 import Produtos from "./pages/Produtos";
 import Carrinho from "./pages/Carrinho";
@@ -18,21 +20,25 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <CartProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/produtos" element={<Produtos />} />
-            <Route path="/carrinho" element={<Carrinho />} />
-            <Route path="/perfil" element={<Perfil />} />
-            <Route path="/sobre" element={<Sobre />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </CartProvider>
+      <AuthProvider>
+        <FavoritesProvider>
+          <CartProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/produtos" element={<Produtos />} />
+                <Route path="/carrinho" element={<Carrinho />} />
+                <Route path="/perfil" element={<Perfil />} />
+                <Route path="/sobre" element={<Sobre />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </CartProvider>
+        </FavoritesProvider>
+      </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );

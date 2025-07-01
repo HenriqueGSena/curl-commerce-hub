@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { User, ShoppingBag, LogOut } from "lucide-react";
+import { FavoritesList } from "./FavoritesList";
 
 interface UserData {
   id: number;
@@ -42,6 +43,8 @@ export const UserProfile = ({ user, onLogout }: UserProfileProps) => {
           </Button>
         </CardHeader>
       </Card>
+
+      <FavoritesList />
 
       <Card>
         <CardHeader>

@@ -1,15 +1,47 @@
-
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useCart } from "@/hooks/useCart";
-import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { Minus, Plus, Trash2, ShoppingBag, LogIn } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const Carrinho = () => {
   const { items, updateQuantity, removeFromCart, getTotalPrice, clearCart } = useCart();
+  const { isAuthenticated } = useAuth();
+
+  // Limpar carrinho se usuário não estiver logado
+  useEffect(() => {
+    if (!isAuthenticated && items.length > 0) {
+      clearCart();
+    }
+  }, [isAuthenticated, items.length, clearCart]);
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        <div className="max-w-4xl mx-auto px-4 py-16 text-center">
+          <LogIn className="h-24 w-24 text-gray-300 mx-auto mb-8" />
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">
+            Login necessário
+          </h1>
+          <p className="text-gray-600 mb-8">
+            Você precisa estar logado para acessar seu carrinho de compras
+          </p>
+          <Link to="/perfil">
+            <Button className="bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white px-8 py-3">
+              Fazer Login
+            </Button>
+          </Link>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   if (items.length === 0) {
     return (
