@@ -43,9 +43,11 @@ export const Header = () => {
 
           {/* Right Side Icons */}
           <div className="flex items-center space-x-4">
-            <Button variant="ghost" size="sm" className="hidden md:flex">
-              <User className="h-5 w-5 text-gray-600" />
-            </Button>
+            <Link to="/perfil">
+              <Button variant="ghost" size="sm" className="hidden md:flex">
+                <User className="h-5 w-5 text-gray-600" />
+              </Button>
+            </Link>
             
             <Link to="/carrinho">
               <Button variant="ghost" size="sm" className="relative">
@@ -82,6 +84,9 @@ export const Header = () => {
               </Link>
               <Link to="/sobre" className="text-gray-700 hover:text-pink-600 transition-colors">
                 {t('header.about')}
+              </Link>
+              <Link to="/perfil" className="text-gray-700 hover:text-pink-600 transition-colors">
+                Perfil
               </Link>
             </div>
           </div>

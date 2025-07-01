@@ -3,6 +3,13 @@ import { ProductCard } from "@/components/ui/ProductCard";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const featuredProducts = [
   {
@@ -56,6 +63,32 @@ const featuredProducts = [
     discount: 25,
     filters: ["curtos", "crespos", "pretos"],
     createdAt: "2024-01-20"
+  },
+  {
+    id: 5,
+    name: "Cabelo Natural Cacheado Ruivo 55cm",
+    price: 349.90,
+    originalPrice: 429.90,
+    image: "/placeholder.svg",
+    category: "Cabelos Naturais",
+    rating: 4.8,
+    reviews: 92,
+    discount: 19,
+    filters: ["longos", "cacheados", "ruivos"],
+    createdAt: "2024-02-28"
+  },
+  {
+    id: 6,
+    name: "Mega Hair Liso Preto 25cm",
+    price: 129.90,
+    originalPrice: 169.90,
+    image: "/placeholder.svg",
+    category: "Mega Hair",
+    rating: 4.5,
+    reviews: 143,
+    discount: 24,
+    filters: ["curtos", "lisos", "pretos"],
+    createdAt: "2024-03-15"
   }
 ];
 
@@ -63,7 +96,7 @@ export const FeaturedProducts = () => {
   return (
     <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 animate-fade-in">
           <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
             Produtos em Destaque
           </h2>
@@ -72,13 +105,29 @@ export const FeaturedProducts = () => {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {featuredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+        <div className="animate-fade-in">
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent>
+              {featuredProducts.map((product) => (
+                <CarouselItem key={product.id} className="md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                  <div className="p-2">
+                    <ProductCard product={product} />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-4" />
+            <CarouselNext className="right-4" />
+          </Carousel>
         </div>
 
-        <div className="text-center">
+        <div className="text-center mt-12 animate-fade-in">
           <Link to="/produtos">
             <Button size="lg" className="bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white px-8 py-3 text-lg group">
               Ver Todos os Produtos

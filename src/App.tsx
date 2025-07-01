@@ -8,6 +8,8 @@ import { CartProvider } from "@/hooks/useCart";
 import Index from "./pages/Index";
 import Produtos from "./pages/Produtos";
 import Carrinho from "./pages/Carrinho";
+import Perfil from "./pages/Perfil";
+import Sobre from "./pages/Sobre";
 import NotFound from "./pages/NotFound";
 import "./i18n";
 
@@ -24,6 +26,8 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/produtos" element={<Produtos />} />
             <Route path="/carrinho" element={<Carrinho />} />
+            <Route path="/perfil" element={<Perfil />} />
+            <Route path="/sobre" element={<Sobre />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
