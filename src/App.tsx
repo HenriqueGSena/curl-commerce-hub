@@ -9,6 +9,7 @@ import { AuthProvider } from "@/hooks/useAuth";
 import { FavoritesProvider } from "@/hooks/useFavorites";
 import Index from "./pages/Index";
 import Produtos from "./pages/Produtos";
+import ProdutoDetalhes from "./pages/ProdutoDetalhes";
 import Carrinho from "./pages/Carrinho";
 import Perfil from "./pages/Perfil";
 import Sobre from "./pages/Sobre";
@@ -29,6 +30,7 @@ const App = () => (
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/produtos" element={<Produtos />} />
+                <Route path="/produto/:id" element={<ProdutoDetalhes />} />
                 <Route path="/carrinho" element={<Carrinho />} />
                 <Route path="/perfil" element={<Perfil />} />
                 <Route path="/sobre" element={<Sobre />} />
