@@ -5,6 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import { allProducts } from "@/data/products";
 import { ProductDetailsGallery } from "./ProductDetailsGallery";
 import { ProductDetailsInfo } from "./ProductDetailsInfo";
+import { ProductDetailsDescription } from "./ProductDetailsDescription";
 import { RelatedProducts } from "./RelatedProducts";
 
 export const ProductDetails = () => {
@@ -39,12 +40,17 @@ export const ProductDetails = () => {
           Voltar
         </Button>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
+        <div className="grid md:grid-cols-2 gap-8 mb-8">
           {/* Galeria de imagens */}
           <ProductDetailsGallery product={product} />
 
           {/* Informações do produto */}
           <ProductDetailsInfo product={product} />
+        </div>
+
+        {/* Descrição do produto */}
+        <div className="mb-12">
+          <ProductDetailsDescription />
         </div>
 
         {/* Produtos relacionados */}

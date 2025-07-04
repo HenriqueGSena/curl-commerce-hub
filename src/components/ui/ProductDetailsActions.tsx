@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useCart } from "@/hooks/useCart";
 import { useAuth } from "@/hooks/useAuth";
@@ -9,7 +8,6 @@ import { ProductSizeSelector } from "./ProductSizeSelector";
 import { ProductVolumeSelector } from "./ProductVolumeSelector";
 import { ProductQuantitySelector } from "./ProductQuantitySelector";
 import { ProductActionButtons } from "./ProductActionButtons";
-import { ProductShippingCalculator } from "./ProductShippingCalculator";
 
 interface ProductDetailsActionsProps {
   product: Product;
@@ -149,8 +147,6 @@ export const ProductDetailsActions = ({ product }: ProductDetailsActionsProps) =
         onBuyNow={handleBuyNow}
         onToggleFavorite={handleToggleFavorite}
       />
-
-      <ProductShippingCalculator />
     </div>
   );
 };
