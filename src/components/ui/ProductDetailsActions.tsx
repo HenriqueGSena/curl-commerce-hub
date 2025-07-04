@@ -2,7 +2,8 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { ShoppingCart, Heart, CreditCard, Plus, Minus } from "lucide-react";
+import { ShoppingCart, Heart, CreditCard, Plus, Minus, Calculator, Truck } from "lucide-react";
+import { Input } from "@/components/ui/input";
 import { useCart } from "@/hooks/useCart";
 import { useAuth } from "@/hooks/useAuth";
 import { useFavorites } from "@/hooks/useFavorites";
@@ -22,12 +23,32 @@ export const ProductDetailsActions = ({ product }: ProductDetailsActionsProps) =
   const [selectedLength, setSelectedLength] = useState<string>("");
   const [selectedWeight, setSelectedWeight] = useState<string>("");
   const [quantity, setQuantity] = useState<number>(1);
+  const [cep, setCep] = useState("");
+  const [frete, setFrete] = useState<number | null>(null);
 
   // Opções de comprimento
   const lengthOptions = [40, 45, 50, 55, 60, 65, 70, 75, 80];
   
   // Opções de peso (100g a 200g, incrementos de 10g)
   const weightOptions = Array.from({ length: 11 }, (_, i) => 100 + (i * 10));
+
+  const calcularFrete = () => {
+    if (cep.length === 8) {
+      // Simulação de cálculo de frete
+      const freteCalculado = Math.floor(Math.random() * 20) + 5;
+      setFrete(freteCalculado);
+      toast({
+        title: "Frete calculado",
+        description: `Frete para ${cep}: R$ ${freteCalculado.toFixed(2)}`,
+      });
+    } else {
+      toast({
+        title: "CEP inválido",
+        description: "Digite um CEP válido com 8 dígitos.",
+        variant: "destructive",
+      });
+    }
+  };
 
   const handleAddToCart = () => {
     if (!isAuthenticated) {
@@ -140,79 +161,76 @@ export const ProductDetailsActions = ({ product }: ProductDetailsActionsProps) =
 
   return (
     <div className="space-y-6">
-      {/* Filtros personalizáveis */}
-      <div className="space-y-6 p-4 bg-pink-50 rounded-lg border border-pink-200">
-        {/* Tamanho do cabelo */}
-        <div className="space-y-3">
-          <Label className="text-gray-700 font-medium">Tamanho</Label>
-          <div className="flex flex-wrap gap-2">
-            {lengthOptions.map((length) => (
-              <button
-                key={length}
-                onClick={() => setSelectedLength(length.toString())}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                  selectedLength === length.toString()
-                    ? 'bg-pink-400 text-white'
-                    : 'bg-white text-gray-700 border border-gray-300 hover:bg-pink-50'
-                }`}
-              >
-                {length}cm
-              </button>
-            ))}
-          </div>
+      {/* Tamanho */}
+      <div className="space-y-3">
+        <Label className="text-base font-medium text-gray-900">Tamanho</Label>
+        <div className="flex flex-wrap gap-2">
+          {lengthOptions.map((length) => (
+            <button
+              key={length}
+              onClick={() => setSelectedLength(length.toString())}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all border ${
+                selectedLength === length.toString()
+                  ? 'bg-pink-400 text-white border-pink-400'
+                  : 'bg-white text-gray-700 border-gray-300 hover:border-pink-300'
+              }`}
+            >
+              {length}cm
+            </button>
+          ))}
         </div>
+      </div>
 
-        {/* Volume (gramas) */}
-        <div className="space-y-3">
-          <Label className="text-gray-700 font-medium">Volume (Gramas)</Label>
-          <div className="flex flex-wrap gap-2">
-            {weightOptions.map((weight) => (
-              <button
-                key={weight}
-                onClick={() => setSelectedWeight(weight.toString())}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                  selectedWeight === weight.toString()
-                    ? 'bg-pink-400 text-white'
-                    : 'bg-white text-gray-700 border border-gray-300 hover:bg-pink-50'
-                }`}
-              >
-                {weight}g
-              </button>
-            ))}
-          </div>
+      {/* Volume (Gramas) */}
+      <div className="space-y-3">
+        <Label className="text-base font-medium text-gray-900">Volume (Gramas)</Label>
+        <div className="flex flex-wrap gap-2">
+          {weightOptions.map((weight) => (
+            <button
+              key={weight}
+              onClick={() => setSelectedWeight(weight.toString())}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all border ${
+                selectedWeight === weight.toString()
+                  ? 'bg-pink-400 text-white border-pink-400'
+                  : 'bg-white text-gray-700 border-gray-300 hover:border-pink-300'
+              }`}
+            >
+              {weight}g
+            </button>
+          ))}
         </div>
+      </div>
 
-        {/* Quantidade */}
-        <div className="space-y-3">
-          <Label className="text-gray-700 font-medium">Quantidade</Label>
-          <div className="flex items-center justify-center max-w-xs">
-            <div className="flex items-center border border-gray-300 rounded-full bg-white">
-              <button
-                onClick={decrementQuantity}
-                className="p-3 hover:bg-gray-100 rounded-l-full transition-colors"
-              >
-                <Minus className="h-4 w-4 text-gray-600" />
-              </button>
-              <span className="px-6 py-3 text-lg font-medium text-gray-900 min-w-[60px] text-center">
-                {quantity}
-              </span>
-              <button
-                onClick={incrementQuantity}
-                className="p-3 hover:bg-gray-100 rounded-r-full transition-colors"
-              >
-                <Plus className="h-4 w-4 text-gray-600" />
-              </button>
-            </div>
+      {/* Quantidade */}
+      <div className="space-y-3">
+        <Label className="text-base font-medium text-gray-900">Quantidade</Label>
+        <div className="flex items-center gap-3">
+          <div className="flex items-center border border-gray-300 rounded-lg bg-white">
+            <button
+              onClick={decrementQuantity}
+              className="px-4 py-2 hover:bg-gray-50 transition-colors"
+            >
+              <Minus className="h-4 w-4 text-gray-600" />
+            </button>
+            <span className="px-6 py-2 text-base font-medium text-gray-900 min-w-[60px] text-center border-l border-r border-gray-300">
+              {quantity}
+            </span>
+            <button
+              onClick={incrementQuantity}
+              className="px-4 py-2 hover:bg-gray-50 transition-colors"
+            >
+              <Plus className="h-4 w-4 text-gray-600" />
+            </button>
           </div>
         </div>
       </div>
 
       {/* Botões de ação */}
-      <div className="space-y-3">
+      <div className="space-y-3 pt-4">
         <Button 
           onClick={handleAddToCart}
           variant="outline"
-          className="w-full border-gray-300 text-gray-700 hover:bg-gray-50 py-3 text-base"
+          className="w-full border-gray-300 text-gray-700 hover:bg-gray-50 py-3 text-base h-12"
           size="lg"
         >
           Adicionar ao carrinho
@@ -220,7 +238,7 @@ export const ProductDetailsActions = ({ product }: ProductDetailsActionsProps) =
         
         <Button 
           onClick={handleBuyNow}
-          className="w-full bg-pink-400 hover:bg-pink-500 text-white py-3 text-base"
+          className="w-full bg-pink-400 hover:bg-pink-500 text-white py-3 text-base h-12"
           size="lg"
         >
           Compre já
@@ -232,7 +250,7 @@ export const ProductDetailsActions = ({ product }: ProductDetailsActionsProps) =
         variant="outline"
         size="lg"
         onClick={handleToggleFavorite}
-        className="w-full border-pink-300 text-pink-700 hover:bg-pink-50"
+        className="w-full border-pink-300 text-pink-600 hover:bg-pink-50 h-12"
       >
         <Heart 
           className={`h-5 w-5 mr-2 ${
@@ -241,8 +259,37 @@ export const ProductDetailsActions = ({ product }: ProductDetailsActionsProps) =
               : 'text-pink-600'
           }`} 
         />
-        {isAuthenticated && isFavorite(product.id) ? 'Remover dos Favoritos' : 'Adicionar aos Favoritos'}
+        {isAuthenticated && isFavorite(product.id) ? 'Adicionar aos Favoritos' : 'Adicionar aos Favoritos'}
       </Button>
+
+      {/* Calcular frete */}
+      <div className="border-t pt-6">
+        <div className="flex items-center gap-2 mb-3">
+          <Truck className="h-5 w-5 text-gray-600" />
+          <span className="font-medium text-gray-700">Calcular frete</span>
+        </div>
+        <div className="flex gap-3">
+          <Input
+            placeholder="00000-000"
+            value={cep}
+            onChange={(e) => setCep(e.target.value.replace(/\D/g, ''))}
+            maxLength={8}
+            className="flex-1"
+          />
+          <Button
+            variant="outline"
+            onClick={calcularFrete}
+            className="flex-shrink-0"
+          >
+            Calcular
+          </Button>
+        </div>
+        {frete && (
+          <p className="text-green-600 mt-3 font-medium">
+            Frete: R$ {frete.toFixed(2)}
+          </p>
+        )}
+      </div>
     </div>
   );
 };
