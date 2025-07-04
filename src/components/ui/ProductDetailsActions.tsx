@@ -1,9 +1,8 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { ShoppingCart, Heart, CreditCard } from "lucide-react";
+import { ShoppingCart, Heart, CreditCard, Plus, Minus } from "lucide-react";
 import { useCart } from "@/hooks/useCart";
 import { useAuth } from "@/hooks/useAuth";
 import { useFavorites } from "@/hooks/useFavorites";
@@ -131,83 +130,100 @@ export const ProductDetailsActions = ({ product }: ProductDetailsActionsProps) =
     }
   };
 
+  const incrementQuantity = () => {
+    setQuantity(prev => prev + 1);
+  };
+
+  const decrementQuantity = () => {
+    setQuantity(prev => prev > 1 ? prev - 1 : 1);
+  };
+
   return (
     <div className="space-y-6">
       {/* Filtros personalizáveis */}
-      <div className="space-y-4 p-4 bg-pink-50 rounded-lg border border-pink-200">
-        <h3 className="font-semibold text-gray-900 mb-3">Personalize seu produto</h3>
-        
+      <div className="space-y-6 p-4 bg-pink-50 rounded-lg border border-pink-200">
         {/* Tamanho do cabelo */}
-        <div className="space-y-2">
-          <Label htmlFor="length">Tamanho do cabelo</Label>
-          <Select value={selectedLength} onValueChange={setSelectedLength}>
-            <SelectTrigger>
-              <SelectValue placeholder="Selecione o comprimento" />
-            </SelectTrigger>
-            <SelectContent>
-              {lengthOptions.map((length) => (
-                <SelectItem key={length} value={length.toString()}>
-                  {length} cm
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+        <div className="space-y-3">
+          <Label className="text-gray-700 font-medium">Tamanho</Label>
+          <div className="flex flex-wrap gap-2">
+            {lengthOptions.map((length) => (
+              <button
+                key={length}
+                onClick={() => setSelectedLength(length.toString())}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                  selectedLength === length.toString()
+                    ? 'bg-pink-400 text-white'
+                    : 'bg-white text-gray-700 border border-gray-300 hover:bg-pink-50'
+                }`}
+              >
+                {length}cm
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Volume (gramas) */}
-        <div className="space-y-2">
-          <Label htmlFor="weight">Volume (gramas)</Label>
-          <Select value={selectedWeight} onValueChange={setSelectedWeight}>
-            <SelectTrigger>
-              <SelectValue placeholder="Selecione o peso" />
-            </SelectTrigger>
-            <SelectContent>
-              {weightOptions.map((weight) => (
-                <SelectItem key={weight} value={weight.toString()}>
-                  {weight}g
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+        <div className="space-y-3">
+          <Label className="text-gray-700 font-medium">Volume (Gramas)</Label>
+          <div className="flex flex-wrap gap-2">
+            {weightOptions.map((weight) => (
+              <button
+                key={weight}
+                onClick={() => setSelectedWeight(weight.toString())}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                  selectedWeight === weight.toString()
+                    ? 'bg-pink-400 text-white'
+                    : 'bg-white text-gray-700 border border-gray-300 hover:bg-pink-50'
+                }`}
+              >
+                {weight}g
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Quantidade */}
-        <div className="space-y-2">
-          <Label htmlFor="quantity">Quantidade</Label>
-          <Select value={quantity.toString()} onValueChange={(value) => setQuantity(Number(value))}>
-            <SelectTrigger>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {Array.from({ length: 10 }, (_, i) => i + 1).map((num) => (
-                <SelectItem key={num} value={num.toString()}>
-                  {num}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+        <div className="space-y-3">
+          <Label className="text-gray-700 font-medium">Quantidade</Label>
+          <div className="flex items-center justify-center max-w-xs">
+            <div className="flex items-center border border-gray-300 rounded-full bg-white">
+              <button
+                onClick={decrementQuantity}
+                className="p-3 hover:bg-gray-100 rounded-l-full transition-colors"
+              >
+                <Minus className="h-4 w-4 text-gray-600" />
+              </button>
+              <span className="px-6 py-3 text-lg font-medium text-gray-900 min-w-[60px] text-center">
+                {quantity}
+              </span>
+              <button
+                onClick={incrementQuantity}
+                className="p-3 hover:bg-gray-100 rounded-r-full transition-colors"
+              >
+                <Plus className="h-4 w-4 text-gray-600" />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Botões de ação */}
       <div className="space-y-3">
         <Button 
-          onClick={handleBuyNow}
-          className="w-full bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white"
+          onClick={handleAddToCart}
+          variant="outline"
+          className="w-full border-gray-300 text-gray-700 hover:bg-gray-50 py-3 text-base"
           size="lg"
         >
-          <CreditCard className="h-5 w-5 mr-2" />
-          Comprar Agora
+          Adicionar ao carrinho
         </Button>
         
         <Button 
-          onClick={handleAddToCart}
-          variant="outline"
-          className="w-full border-pink-300 text-pink-700 hover:bg-pink-50"
+          onClick={handleBuyNow}
+          className="w-full bg-pink-400 hover:bg-pink-500 text-white py-3 text-base"
           size="lg"
         >
-          <ShoppingCart className="h-5 w-5 mr-2" />
-          Adicionar ao Carrinho
+          Compre já
         </Button>
       </div>
 
