@@ -3,9 +3,18 @@ import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { Instagram, Facebook, Twitter, Mail, Phone, MapPin } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 export const Footer = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const handleNavigation = (path: string) => {
+    navigate(path);
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+  };
 
   return (
     <footer className="bg-gray-900 text-white animate-fade-in">
@@ -41,7 +50,14 @@ export const Footer = () => {
             <ul className="space-y-2 text-sm">
               <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.aboutUs')}</a></li>
               <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('header.products')}</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.contact')}</a></li>
+              <li>
+                <button 
+                  onClick={() => handleNavigation("/contato")} 
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
+                  {t('footer.contact')}
+                </button>
+              </li>
               <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.blog')}</a></li>
             </ul>
           </div>

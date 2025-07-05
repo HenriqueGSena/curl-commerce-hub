@@ -48,6 +48,9 @@ export const Header = () => {
             <button onClick={() => handleNavigation("/sobre")} className="text-gray-700 hover:text-pink-600 transition-colors">
               {t('header.about')}
             </button>
+            <button onClick={() => handleNavigation("/contato")} className="text-gray-700 hover:text-pink-600 transition-colors">
+              Contato
+            </button>
           </nav>
 
           {/* Right Side Icons */}
@@ -108,6 +111,12 @@ export const Header = () => {
                 className="block w-full text-left py-3 px-4 text-gray-700 hover:text-pink-600 hover:bg-pink-50 rounded-lg transition-colors"
               >
                 {t('header.about')}
+              </button>
+              <button 
+                onClick={() => handleNavigation("/contato")} 
+                className="block w-full text-left py-3 px-4 text-gray-700 hover:text-pink-600 hover:bg-pink-50 rounded-lg transition-colors"
+              >
+                Contato
               </button>
               <button 
                 onClick={() => handleNavigation("/perfil")} 
