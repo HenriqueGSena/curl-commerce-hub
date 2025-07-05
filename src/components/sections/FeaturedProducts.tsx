@@ -2,7 +2,7 @@
 import { ProductCard } from "@/components/ui/ProductCard";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Carousel,
   CarouselContent,
@@ -93,6 +93,15 @@ const featuredProducts = [
 ];
 
 export const FeaturedProducts = () => {
+  const navigate = useNavigate();
+
+  const handleViewAllProducts = () => {
+    navigate("/produtos");
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+  };
+
   return (
     <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -128,12 +137,14 @@ export const FeaturedProducts = () => {
         </div>
 
         <div className="text-center mt-12 animate-fade-in">
-          <Link to="/produtos">
-            <Button size="lg" className="bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white px-8 py-3 text-lg group">
-              Ver Todos os Produtos
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </Link>
+          <Button 
+            onClick={handleViewAllProducts}
+            size="lg" 
+            className="bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white px-8 py-3 text-lg group"
+          >
+            Ver Todos os Produtos
+            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+          </Button>
         </div>
       </div>
     </section>
