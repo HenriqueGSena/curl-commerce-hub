@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const Sobre = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-brand-light to-white">
       <Header />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 animate-fade-in">
         <div className="text-center mb-12">
@@ -18,9 +18,9 @@ const Sobre = () => {
         </div>
 
         <div className="space-y-8">
-          <Card className="animate-fade-in">
+          <Card className="animate-fade-in border-brand-light hover:border-brand-medium transition-colors">
             <CardContent className="p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl font-bold text-brand-dark mb-4">
                 O Início de Tudo
               </h2>
               <p className="text-gray-700 leading-relaxed mb-4">
@@ -36,9 +36,9 @@ const Sobre = () => {
             </CardContent>
           </Card>
 
-          <Card className="animate-fade-in">
+          <Card className="animate-fade-in border-brand-light hover:border-brand-medium transition-colors">
             <CardContent className="p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl font-bold text-brand-dark mb-4">
                 Crescimento e Expansão
               </h2>
               <p className="text-gray-700 leading-relaxed mb-4">
@@ -54,9 +54,9 @@ const Sobre = () => {
             </CardContent>
           </Card>
 
-          <Card className="animate-fade-in">
+          <Card className="animate-fade-in border-brand-light hover:border-brand-medium transition-colors">
             <CardContent className="p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl font-bold text-brand-dark mb-4">
                 Nosso Compromisso
               </h2>
               <p className="text-gray-700 leading-relaxed mb-4">
@@ -74,15 +74,15 @@ const Sobre = () => {
 
           <div className="grid md:grid-cols-3 gap-6 mt-12">
             <div className="text-center animate-fade-in">
-              <div className="text-4xl font-bold text-pink-600 mb-2">9+</div>
+              <div className="text-4xl font-bold text-brand-primary mb-2">9+</div>
               <div className="text-gray-600">Anos de Experiência</div>
             </div>
             <div className="text-center animate-fade-in">
-              <div className="text-4xl font-bold text-pink-600 mb-2">10k+</div>
+              <div className="text-4xl font-bold text-brand-primary mb-2">10k+</div>
               <div className="text-gray-600">Clientes Satisfeitas</div>
             </div>
             <div className="text-center animate-fade-in">
-              <div className="text-4xl font-bold text-pink-600 mb-2">500+</div>
+              <div className="text-4xl font-bold text-brand-primary mb-2">500+</div>
               <div className="text-gray-600">Produtos Disponíveis</div>
             </div>
           </div>
