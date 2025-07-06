@@ -19,8 +19,8 @@ export const ProductSizeSelector = ({ selectedLength, onLengthChange }: ProductS
             onClick={() => onLengthChange(length.toString())}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-all border ${
               selectedLength === length.toString()
-                ? 'bg-pink-400 text-white border-pink-400'
-                : 'bg-white text-gray-700 border-gray-300 hover:border-pink-300'
+                ? 'bg-brand-primary text-white border-brand-primary'
+                : 'bg-white text-gray-700 border-gray-300 hover:border-brand-medium'
             }`}
           >
             {length}cm

@@ -5,7 +5,7 @@ import { ProductDetails } from "@/components/ui/ProductDetails";
 
 const ProdutoDetalhes = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white animate-fade-in">
+    <div className="min-h-screen bg-gradient-to-b from-brand-light to-white animate-fade-in">
       <Header />
       <main>
         <ProductDetails />

@@ -61,7 +61,7 @@ const Produtos = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white animate-fade-in">
+    <div className="min-h-screen bg-gradient-to-b from-brand-light to-white animate-fade-in">
       <Header />
       
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -76,12 +76,12 @@ const Produtos = () => {
           <div className="mb-6">
             <div className="flex items-center gap-2">
               <span className="text-sm text-gray-600">Filtrando por:</span>
-              <Badge variant="secondary" className="bg-pink-100 text-pink-700 flex items-center gap-2">
+              <Badge variant="secondary" className="bg-brand-light text-brand-dark flex items-center gap-2">
                 {getCategoryDisplayName(categoryFilter)}
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="h-4 w-4 p-0 hover:bg-pink-200"
+                  className="h-4 w-4 p-0 hover:bg-brand-secondary"
                   onClick={clearCategoryFilter}
                 >
                   <X className="h-3 w-3" />
