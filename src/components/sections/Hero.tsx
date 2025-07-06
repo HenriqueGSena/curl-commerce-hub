@@ -5,13 +5,13 @@ import { Link } from "react-router-dom";
 
 export const Hero = () => {
   return (
-    <section className="relative bg-gradient-to-r from-pink-50 via-rose-50 to-pink-50 py-20 lg:py-32">
+    <section className="relative bg-gradient-to-r from-brand-light via-brand-light/50 to-brand-light py-20 lg:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center space-y-8 animate-fade-in">
           <div className="space-y-4">
             <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight">
               Transforme seu
-              <span className="bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-brand-primary to-brand-dark bg-clip-text text-transparent">
                 {" "}visual
               </span>
               <br />
@@ -25,13 +25,13 @@ export const Hero = () => {
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/produtos">
-              <Button size="lg" className="bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white px-8 py-3 text-lg group">
+              <Button size="lg" className="bg-gradient-to-r from-brand-primary to-brand-dark hover:from-brand-secondary hover:to-brand-primary text-white px-8 py-3 text-lg group">
                 Ver Produtos
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
             <Link to="/sobre">
-              <Button variant="outline" size="lg" className="border-pink-300 text-pink-700 hover:bg-pink-50 px-8 py-3 text-lg">
+              <Button variant="outline" size="lg" className="border-brand-medium text-brand-dark hover:bg-brand-light px-8 py-3 text-lg">
                 Saiba Mais
               </Button>
             </Link>

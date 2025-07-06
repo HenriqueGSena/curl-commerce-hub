@@ -140,7 +140,7 @@ export const FeaturedProducts = () => {
           <Button 
             onClick={handleViewAllProducts}
             size="lg" 
-            className="bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white px-8 py-3 text-lg group"
+            className="bg-gradient-to-r from-brand-primary to-brand-dark hover:from-brand-secondary hover:to-brand-primary text-white px-8 py-3 text-lg group"
           >
             Ver Todos os Produtos
             <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />

@@ -36,7 +36,7 @@ export const ProductActionButtons = ({
       
       <Button 
         onClick={onBuyNow}
-        className="w-full bg-pink-400 hover:bg-pink-500 text-white py-3 text-base h-12"
+        className="w-full bg-brand-primary hover:bg-brand-secondary text-white py-3 text-base h-12"
         size="lg"
       >
         Compre já
@@ -46,13 +46,13 @@ export const ProductActionButtons = ({
         variant="outline"
         size="lg"
         onClick={onToggleFavorite}
-        className="w-full border-pink-300 text-pink-600 hover:bg-pink-50 h-12"
+        className="w-full border-brand-medium text-brand-primary hover:bg-brand-light h-12"
       >
         <Heart 
           className={`h-5 w-5 mr-2 ${
             isAuthenticated && isFavorite(product.id) 
               ? 'text-red-500 fill-red-500' 
-              : 'text-pink-600'
+              : 'text-brand-primary'
           }`} 
         />
         {isAuthenticated && isFavorite(product.id) ? 'Adicionar aos Favoritos' : 'Adicionar aos Favoritos'}

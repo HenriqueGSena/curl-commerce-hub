@@ -11,12 +11,12 @@ export const ProductCardContent = ({ product }: ProductCardContentProps) => {
   return (
     <div className="p-4 flex-1 flex flex-col">
       <div className="mb-2">
-        <Badge variant="secondary" className="text-xs bg-pink-100 text-pink-700">
+        <Badge variant="secondary" className="text-xs bg-brand-light text-brand-dark">
           {product.category}
         </Badge>
       </div>
       
-      <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2 min-h-[3rem] group-hover:text-pink-700 transition-colors">
+      <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2 min-h-[3rem] group-hover:text-brand-primary transition-colors">
         {product.name}
       </h3>
       
@@ -43,7 +43,7 @@ export const ProductCardContent = ({ product }: ProductCardContentProps) => {
       </div>
 
       <div className="text-center">
-        <span className="text-sm text-pink-600 font-medium">
+        <span className="text-sm text-brand-primary font-medium">
           Clique para ver detalhes
         </span>
       </div>

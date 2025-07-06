@@ -119,7 +119,7 @@ export const ContactForm = () => {
         <div className="pt-4">
           <Button
             type="submit"
-            className="bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white font-medium py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-105"
+            className="bg-gradient-to-r from-brand-primary to-brand-secondary hover:from-brand-secondary hover:to-brand-primary text-white font-medium py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-105"
           >
             Enviar
           </Button>

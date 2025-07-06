@@ -18,7 +18,7 @@ const categories = [
     name: "synthetic",
     description: "syntheticDesc",
     icon: "✨",
-    color: "from-purple-400 to-pink-500",
+    color: "from-brand-primary to-brand-secondary",
     filter: "sinteticos"
   },
   {
@@ -26,7 +26,7 @@ const categories = [
     name: "megaHair",
     description: "megaHairDesc",
     icon: "💫",
-    color: "from-blue-400 to-cyan-500",
+    color: "from-brand-medium to-brand-primary",
     filter: "mega-hair"
   },
   {
@@ -34,7 +34,7 @@ const categories = [
     name: "wigs",
     description: "wigsDesc",
     icon: "👸",
-    color: "from-rose-400 to-pink-500",
+    color: "from-brand-secondary to-brand-primary",
     filter: "perucas"
   }
 ];
@@ -64,7 +64,7 @@ export const Categories = () => {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {categories.map((category) => (
-            <Card key={category.id} className="group hover:shadow-xl transition-all duration-300 cursor-pointer border-pink-100 hover:border-pink-200 hover:scale-105">
+            <Card key={category.id} className="group hover:shadow-xl transition-all duration-300 cursor-pointer border-brand-light hover:border-brand-medium hover:scale-105">
               <CardContent className="p-6 text-center">
                 <div className={`w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r ${category.color} flex items-center justify-center text-2xl group-hover:scale-110 transition-transform`}>
                   {category.icon}
@@ -78,7 +78,7 @@ export const Categories = () => {
                 <Button 
                   variant="outline" 
                   size="sm" 
-                  className="border-pink-300 text-pink-700 hover:bg-pink-50 group-hover:bg-pink-100"
+                  className="border-brand-medium text-brand-dark hover:bg-brand-light group-hover:bg-brand-light/50"
                   onClick={() => handleCategoryClick(category.filter)}
                 >
                   {t('categories.seeProducts')}

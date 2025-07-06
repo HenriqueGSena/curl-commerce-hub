@@ -28,13 +28,13 @@ export const ProductDetails = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-brand-light to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Botão voltar */}
         <Button
           variant="ghost"
           onClick={() => navigate(-1)}
-          className="mb-6 text-pink-600 hover:text-pink-700"
+          className="mb-6 text-brand-primary hover:text-brand-dark"
         >
           <ArrowLeft className="h-4 w-4 mr-2" />
           Voltar

@@ -24,31 +24,31 @@ export const Header = () => {
   };
 
   return (
-    <header className="bg-white/80 backdrop-blur-md shadow-sm border-b border-pink-100/50 sticky top-0 z-50 animate-fade-in">
+    <header className="bg-white/80 backdrop-blur-md shadow-sm border-b border-brand-light/50 sticky top-0 z-50 animate-fade-in">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <button onClick={() => handleNavigation("/")} className="flex items-center space-x-2">
-            <div className="bg-gradient-to-r from-pink-400 to-rose-400 text-white p-2 rounded-lg">
+            <div className="bg-gradient-to-r from-brand-primary to-brand-secondary text-white p-2 rounded-lg">
               <span className="font-bold text-xl">H</span>
             </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent">
+            <span className="text-2xl font-bold bg-gradient-to-r from-brand-primary to-brand-dark bg-clip-text text-transparent">
               HairLux
             </span>
           </button>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <button onClick={() => handleNavigation("/")} className="text-gray-700 hover:text-pink-600 transition-colors">
+            <button onClick={() => handleNavigation("/")} className="text-gray-700 hover:text-brand-primary transition-colors">
               {t('header.home')}
             </button>
-            <button onClick={() => handleNavigation("/produtos")} className="text-gray-700 hover:text-pink-600 transition-colors">
+            <button onClick={() => handleNavigation("/produtos")} className="text-gray-700 hover:text-brand-primary transition-colors">
               {t('header.products')}
             </button>
-            <button onClick={() => handleNavigation("/sobre")} className="text-gray-700 hover:text-pink-600 transition-colors">
+            <button onClick={() => handleNavigation("/sobre")} className="text-gray-700 hover:text-brand-primary transition-colors">
               {t('header.about')}
             </button>
-            <button onClick={() => handleNavigation("/contato")} className="text-gray-700 hover:text-pink-600 transition-colors">
+            <button onClick={() => handleNavigation("/contato")} className="text-gray-700 hover:text-brand-primary transition-colors">
               Contato
             </button>
           </nav>
@@ -65,7 +65,7 @@ export const Header = () => {
               <Button variant="ghost" size="sm" className="relative">
                 <ShoppingBag className="h-5 w-5 text-gray-600" />
                 {cartItemsCount > 0 && (
-                  <Badge className="absolute -top-2 -right-2 bg-pink-500 text-white text-xs px-1 min-w-[20px] h-5 flex items-center justify-center rounded-full">
+                  <Badge className="absolute -top-2 -right-2 bg-brand-primary text-white text-xs px-1 min-w-[20px] h-5 flex items-center justify-center rounded-full">
                     {cartItemsCount}
                   </Badge>
                 )}
@@ -96,31 +96,31 @@ export const Header = () => {
             <div className="px-4 py-6 space-y-4">
               <button 
                 onClick={() => handleNavigation("/")} 
-                className="block w-full text-left py-3 px-4 text-gray-700 hover:text-pink-600 hover:bg-pink-50 rounded-lg transition-colors"
+                className="block w-full text-left py-3 px-4 text-gray-700 hover:text-brand-primary hover:bg-brand-light/20 rounded-lg transition-colors"
               >
                 {t('header.home')}
               </button>
               <button 
                 onClick={() => handleNavigation("/produtos")} 
-                className="block w-full text-left py-3 px-4 text-gray-700 hover:text-pink-600 hover:bg-pink-50 rounded-lg transition-colors"
+                className="block w-full text-left py-3 px-4 text-gray-700 hover:text-brand-primary hover:bg-brand-light/20 rounded-lg transition-colors"
               >
                 {t('header.products')}
               </button>
               <button 
                 onClick={() => handleNavigation("/sobre")} 
-                className="block w-full text-left py-3 px-4 text-gray-700 hover:text-pink-600 hover:bg-pink-50 rounded-lg transition-colors"
+                className="block w-full text-left py-3 px-4 text-gray-700 hover:text-brand-primary hover:bg-brand-light/20 rounded-lg transition-colors"
               >
                 {t('header.about')}
               </button>
               <button 
                 onClick={() => handleNavigation("/contato")} 
-                className="block w-full text-left py-3 px-4 text-gray-700 hover:text-pink-600 hover:bg-pink-50 rounded-lg transition-colors"
+                className="block w-full text-left py-3 px-4 text-gray-700 hover:text-brand-primary hover:bg-brand-light/20 rounded-lg transition-colors"
               >
                 Contato
               </button>
               <button 
                 onClick={() => handleNavigation("/perfil")} 
-                className="block w-full text-left py-3 px-4 text-gray-700 hover:text-pink-600 hover:bg-pink-50 rounded-lg transition-colors"
+                className="block w-full text-left py-3 px-4 text-gray-700 hover:text-brand-primary hover:bg-brand-light/20 rounded-lg transition-colors"
               >
                 Perfil
               </button>

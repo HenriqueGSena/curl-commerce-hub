@@ -17,28 +17,28 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="bg-gray-900 text-white animate-fade-in">
+    <footer className="bg-brand-dark text-white animate-fade-in">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid md:grid-cols-3 gap-8">
           {/* Brand Section */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="bg-gradient-to-r from-pink-400 to-rose-400 text-white p-2 rounded-lg">
+              <div className="bg-gradient-to-r from-brand-primary to-brand-secondary text-white p-2 rounded-lg">
                 <span className="font-bold text-xl">H</span>
               </div>
               <span className="text-2xl font-bold">HairLux</span>
             </div>
-            <p className="text-gray-400 text-sm">
+            <p className="text-brand-light text-sm">
               {t('footer.description')}
             </p>
             <div className="flex space-x-4">
-              <Button variant="ghost" size="sm" className="text-gray-400 hover:text-white">
+              <Button variant="ghost" size="sm" className="text-brand-light hover:text-white">
                 <Instagram className="h-5 w-5" />
               </Button>
-              <Button variant="ghost" size="sm" className="text-gray-400 hover:text-white">
+              <Button variant="ghost" size="sm" className="text-brand-light hover:text-white">
                 <Facebook className="h-5 w-5" />
               </Button>
-              <Button variant="ghost" size="sm" className="text-gray-400 hover:text-white">
+              <Button variant="ghost" size="sm" className="text-brand-light hover:text-white">
                 <Twitter className="h-5 w-5" />
               </Button>
             </div>
@@ -48,17 +48,17 @@ export const Footer = () => {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">{t('footer.quickLinks')}</h3>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.aboutUs')}</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('header.products')}</a></li>
+              <li><a href="#" className="text-brand-light hover:text-white transition-colors">{t('footer.aboutUs')}</a></li>
+              <li><a href="#" className="text-brand-light hover:text-white transition-colors">{t('header.products')}</a></li>
               <li>
                 <button 
                   onClick={() => handleNavigation("/contato")} 
-                  className="text-gray-400 hover:text-white transition-colors"
+                  className="text-brand-light hover:text-white transition-colors"
                 >
                   {t('footer.contact')}
                 </button>
               </li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.blog')}</a></li>
+              <li><a href="#" className="text-brand-light hover:text-white transition-colors">{t('footer.blog')}</a></li>
             </ul>
           </div>
 
@@ -66,20 +66,20 @@ export const Footer = () => {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">{t('footer.customerService')}</h3>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.helpCenter')}</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.returnPolicy')}</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.shipping')}</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.terms')}</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.privacy')}</a></li>
+              <li><a href="#" className="text-brand-light hover:text-white transition-colors">{t('footer.helpCenter')}</a></li>
+              <li><a href="#" className="text-brand-light hover:text-white transition-colors">{t('footer.returnPolicy')}</a></li>
+              <li><a href="#" className="text-brand-light hover:text-white transition-colors">{t('footer.shipping')}</a></li>
+              <li><a href="#" className="text-brand-light hover:text-white transition-colors">{t('footer.terms')}</a></li>
+              <li><a href="#" className="text-brand-light hover:text-white transition-colors">{t('footer.privacy')}</a></li>
             </ul>
           </div>
         </div>
 
-        <Separator className="my-8 bg-gray-800" />
+        <Separator className="my-8 bg-brand-medium" />
 
         {/* Bottom Section */}
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <div className="flex items-center space-x-6 text-sm text-gray-400">
+          <div className="flex items-center space-x-6 text-sm text-brand-light">
             <div className="flex items-center space-x-2">
               <Phone className="h-4 w-4" />
               <span>(11) 99999-9999</span>
@@ -94,7 +94,7 @@ export const Footer = () => {
             </div>
           </div>
           
-          <div className="text-sm text-gray-400">
+          <div className="text-sm text-brand-light">
             © 2024 HairLux. {t('footer.allRights')}
           </div>
         </div>

@@ -10,7 +10,7 @@ interface ProductDetailsHeaderProps {
 export const ProductDetailsHeader = ({ product }: ProductDetailsHeaderProps) => {
   return (
     <div>
-      <Badge variant="secondary" className="bg-pink-100 text-pink-700 mb-2">
+      <Badge variant="secondary" className="bg-brand-light text-brand-dark mb-2">
         {product.category}
       </Badge>
       <h1 className="text-3xl font-bold text-gray-900 mb-4">
