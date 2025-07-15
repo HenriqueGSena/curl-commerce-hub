@@ -1,23 +1,35 @@
 
-import { BaseCard } from "@/components/ui/BaseCard";
+import { GenericCard } from "@/components/ui/GenericCard";
 import { Product } from "@/data/products";
-import { Link } from "react-router-dom";
-import { ProductCardImage } from "./ProductCardImage";
-import { ProductCardContent } from "./ProductCardContent";
 
 interface ProductCardProps {
   product: Product;
 }
 
 export const ProductCard = ({ product }: ProductCardProps) => {
+  const cardData = {
+    id: product.id.toString(),
+    title: product.name,
+    price: product.price,
+    originalPrice: product.originalPrice,
+    image: product.image,
+    category: product.category,
+    discount: product.discount,
+    rating: product.rating,
+    reviews: product.reviews,
+    description: "Cabelo de alta qualidade, ideal para transformar seu visual com elegância e naturalidade.",
+    link: `/produto/${product.id}`
+  };
+
   return (
-    <Link to={`/produto/${product.id}`}>
-      <BaseCard variant="product" size="none" className="h-full flex flex-col">
-        <ProductCardImage product={product} />
-        <div className="p-0">
-          <ProductCardContent product={product} />
-        </div>
-      </BaseCard>
-    </Link>
+    <GenericCard 
+      data={cardData}
+      variant="product"
+      size="none"
+      showImage={true}
+      showActions={true}
+      showRating={true}
+      showPrice={true}
+    />
   );
 };
