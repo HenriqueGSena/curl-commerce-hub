@@ -1,5 +1,5 @@
 
-import { Card, CardContent } from "@/components/ui/card";
+import { BaseCard } from "@/components/ui/BaseCard";
 import { Product } from "@/data/products";
 import { Link } from "react-router-dom";
 import { ProductCardImage } from "./ProductCardImage";
@@ -12,12 +12,12 @@ interface ProductCardProps {
 export const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <Link to={`/produto/${product.id}`}>
-      <Card className="group hover:shadow-xl transition-all duration-300 border-brand-light hover:border-brand-primary overflow-hidden h-full flex flex-col cursor-pointer">
+      <BaseCard variant="product" size="none" className="h-full flex flex-col">
         <ProductCardImage product={product} />
-        <CardContent className="p-0">
+        <div className="p-0">
           <ProductCardContent product={product} />
-        </CardContent>
-      </Card>
+        </div>
+      </BaseCard>
     </Link>
   );
 };
