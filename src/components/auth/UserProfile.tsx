@@ -88,7 +88,7 @@ export const UserProfile = ({ user, onLogout }: UserProfileProps) => {
                     key={order.id}
                     data={cardData}
                     variant="content"
-                    size="sm"
+                    size="none"
                     showActions={false}
                     showRating={false}
                     className="w-full"
