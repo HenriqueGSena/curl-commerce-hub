@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { User, ShoppingBag, LogOut } from "lucide-react";
 import { FavoritesList } from "./FavoritesList";
+import { GenericCard } from "@/components/ui/GenericCard";
 
 interface UserData {
   id: number;
@@ -59,28 +60,41 @@ export const UserProfile = ({ user, onLogout }: UserProfileProps) => {
               Nenhuma compra realizada ainda
             </p>
           ) : (
-            <div className="space-y-4">
-              {user.purchaseHistory.map((order) => (
-                <div key={order.id} className="border rounded-lg p-4">
-                  <div className="flex justify-between items-start mb-2">
-                    <div>
-                      <p className="font-semibold">Pedido #{order.id}</p>
-                      <p className="text-sm text-gray-600">{order.date}</p>
-                    </div>
-                    <Badge variant={order.status === "Entregue" ? "default" : "secondary"}>
-                      {order.status}
-                    </Badge>
-                  </div>
-                  <div className="space-y-1">
-                    {order.items.map((item, index) => (
-                      <p key={index} className="text-sm text-gray-700">• {item}</p>
-                    ))}
-                  </div>
-                  <p className="font-bold text-right mt-2">
-                    Total: R$ {order.total.toFixed(2)}
-                  </p>
-                </div>
-              ))}
+            <div className="grid gap-4">
+              {user.purchaseHistory.map((order) => {
+                // Simulando imagens para os produtos do pedido
+                const orderImages = [
+                  "/placeholder.svg",
+                  "/placeholder.svg", 
+                  "/placeholder.svg"
+                ].slice(0, Math.min(order.items.length, 3));
+
+                const cardData = {
+                  id: order.id.toString(),
+                  title: `Pedido #${order.id}`,
+                  subtitle: order.date,
+                  price: order.total,
+                  images: orderImages,
+                  category: order.status,
+                  badge: {
+                    text: order.status,
+                    variant: (order.status === "Entregue" ? "default" : "secondary") as "default" | "secondary" | "destructive" | "outline"
+                  },
+                  description: order.items.join(" • ")
+                };
+
+                return (
+                  <GenericCard
+                    key={order.id}
+                    data={cardData}
+                    variant="content"
+                    size="none"
+                    showActions={false}
+                    showRating={false}
+                    className="w-full"
+                  />
+                );
+              })}
             </div>
           )}
         </CardContent>
