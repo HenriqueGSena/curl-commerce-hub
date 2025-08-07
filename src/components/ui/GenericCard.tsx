@@ -115,7 +115,7 @@ export const GenericCard = ({
       {/* Imagem */}
       {showImage && cardImages.length > 0 && (
         <div className="relative">
-          <div className="aspect-square bg-gradient-to-br from-brand-light/20 to-brand-medium/20 flex items-center justify-center relative overflow-hidden rounded-t-lg">
+          <div className={`${size === 'sm' ? 'aspect-[4/3]' : 'aspect-square'} bg-gradient-to-br from-brand-light/20 to-brand-medium/20 flex items-center justify-center relative overflow-hidden rounded-t-lg`}>
             <div className="text-brand-primary/40 text-4xl">📸</div>
             
             {/* Indicadores da galeria */}
